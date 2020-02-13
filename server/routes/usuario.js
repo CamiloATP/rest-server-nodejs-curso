@@ -1,12 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
+const { verificarToken, verificarAdminRole } = require('./../middlewares/autenticacion');
 
 const app = express();
 
 const Usuario = require('./../models/usuario');
 
-app.get('/usuario', (req, res) => {
+app.get('/usuario', verificarToken, (req, res) => {
 
 	let desde = Number(req.query.desde) || 0;
 	let limite = Number(req.query.limite) || 5;
@@ -30,7 +31,7 @@ app.get('/usuario', (req, res) => {
 	});
 });
 
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [verificarToken, verificarAdminRole], (req, res) => {
 
 	let {nombre, email, password, role} = req.body;
 
@@ -50,7 +51,7 @@ app.post('/usuario', (req, res) => {
 
 // Para validar filtrar los datos del objeto
 // > npm install underscore --save
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/:id', [verificarToken, verificarAdminRole], (req, res) => {
 
 	const { id } = req.params;
 	// Filtrando el objeto
@@ -66,7 +67,7 @@ app.put('/usuario/:id', (req, res) => {
 	});
 });
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', [verificarToken, verificarAdminRole],(req, res) => {
 	
 	// let {id} = req.params;
 

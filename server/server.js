@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 // Instalar paquete para recibir datos vía POST
 // > npm i body-parser --save
 
-// Routes usuario
-app.use(require('./routes/usuario'));
+// Routes
+app.use(require('./routes/index'));
 
 // Configuraciones de Mongoose
 const options = {
@@ -30,11 +30,6 @@ const callback = (err, res) => {
 	console.log('> Base de datos cargada...');
 }
 
-// mongoose.connect(process.env.URLDB, options, callback);
 mongoose.connect(process.env.URLDB, options, callback);
 
 app.listen(process.env.PORT, () => console.log(`Escuchando el puerto ${process.env.PORT}`));
-
-// > npm install mongoose --save
-
-// nodemon server/server

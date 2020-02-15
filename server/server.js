@@ -1,5 +1,6 @@
 require('./config/config');
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -10,8 +11,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
 app.use(bodyParser.json());
-// Instalar paquete para recibir datos vía POST
-// > npm i body-parser --save
+
+// Habilitar el public
+// app.use(express.static(__dirname + './../public'));
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 // Routes
 app.use(require('./routes/index'));

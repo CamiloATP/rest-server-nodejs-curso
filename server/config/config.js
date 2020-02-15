@@ -33,4 +33,9 @@ process.env.TOKEN_CADUCA = 60 * 60 * 24 * 30;
 // =====================
 process.env.SEED = process.env.SEED || 'seed-de-desarrollo';
 
+// =====================
+// Google Client ID
+// =====================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '427761955186-su657ob755ot7a5t47gmsu8vq4820phb.apps.googleusercontent.com';
+
 // > heroku config:set variable='valor'

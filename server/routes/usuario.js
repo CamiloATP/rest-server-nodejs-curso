@@ -8,7 +8,6 @@ const app = express();
 const Usuario = require('./../models/usuario');
 
 app.get('/usuario', verificarToken, (req, res) => {
-
 	let desde = Number(req.query.desde) || 0;
 	let limite = Number(req.query.limite) || 5;
 
@@ -23,7 +22,7 @@ app.get('/usuario', verificarToken, (req, res) => {
 			});
 		}
 		
-		// >> ount is deprecated
+		// >> count is deprecated
 		Usuario.countDocuments({estado: true}, (err, cantidad) => {
 			res.json({ok: true, usuarios, cantidad});
 		})
@@ -32,7 +31,6 @@ app.get('/usuario', verificarToken, (req, res) => {
 });
 
 app.post('/usuario', [verificarToken, verificarAdminRole], (req, res) => {
-
 	let {nombre, email, password, role} = req.body;
 
 	// Crear Hash
@@ -52,7 +50,6 @@ app.post('/usuario', [verificarToken, verificarAdminRole], (req, res) => {
 // Para validar filtrar los datos del objeto
 // > npm install underscore --save
 app.put('/usuario/:id', [verificarToken, verificarAdminRole], (req, res) => {
-
 	const { id } = req.params;
 	// Filtrando el objeto
 	const body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
@@ -68,7 +65,6 @@ app.put('/usuario/:id', [verificarToken, verificarAdminRole], (req, res) => {
 });
 
 app.delete('/usuario/:id', [verificarToken, verificarAdminRole],(req, res) => {
-	
 	// let {id} = req.params;
 
 	// Usuario.findByIdAndRemove(id, (err, usuario) => {
@@ -95,7 +91,6 @@ app.delete('/usuario/:id', [verificarToken, verificarAdminRole],(req, res) => {
 
 		res.json({ok: true, persona: usuarioDB});
 	});
-
 });
 
 module.exports = app;

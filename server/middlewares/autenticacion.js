@@ -30,6 +30,8 @@ let verificarToken = (req, res, next) => {
 let verificarAdminRole = (req, res, next) => {
     let {usuario} = req;
 
+    // console.log(usuario);
+
     if(usuario.role === 'USER_ROLE')
     {
         return res.status(401).json({
